@@ -48,4 +48,16 @@ pub enum AnchorError {
     /// Invalid Anchor directory structure.
     #[error("Invalid Anchor directory structure: {0}")]
     InvalidStructure(String),
+
+    /// File has an unsupported language (no tree-sitter grammar available).
+    #[error("Unsupported language for file: {0}")]
+    UnsupportedLanguage(PathBuf),
+
+    /// tree-sitter parser failed to initialize for a language.
+    #[error("Parser init failed for {0}: {1}")]
+    ParserInitError(PathBuf, String),
+
+    /// tree-sitter returned None from parse (e.g., timeout or cancellation).
+    #[error("tree-sitter parse failed for: {0}")]
+    TreeSitterParseFailed(PathBuf),
 }
